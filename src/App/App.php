@@ -3,7 +3,7 @@ session_start();
 
 require __DIR__ . '../../../vendor/autoload.php';
 
-$page = isset($_GET["page"])?$_GET["page"]:"";
+$page = isset($_GET["page"])?$_GET["page"]:"homepage";
 $view = "homepage.php";
 $data = null;
 
@@ -27,6 +27,9 @@ switch ($page) {
         break;
     case "article":
         list($view, $data) = $factory->get("article")->get();
+        break;
+    case "homepage":
+        list($view, $data) = $factory->get("article")->list();
         break;
 }
 

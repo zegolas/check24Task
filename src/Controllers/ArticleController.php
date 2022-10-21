@@ -57,4 +57,11 @@ class ArticleController extends BaseController
 
         return ["article.php", $items[0]];
     }
+
+    public function list()
+    {
+        $stmnt = "SELECT * FROM articles ORDER BY createdAt desc limit 3";
+        $items = $this->persistence->select($stmnt);
+        return ["homepage.php", $items];
+    }
 }
