@@ -5,6 +5,7 @@ require __DIR__ . '../../../vendor/autoload.php';
 
 $page = isset($_GET["page"])?$_GET["page"]:"";
 $view = "homepage.php";
+$data = null;
 
 $factory = new App\Factory\Factory();
 
@@ -13,16 +14,19 @@ switch ($page) {
         $view = $factory->get("user")->loginForm();
         break;
     case "loginRequest":
-        $view = $factory->get("user")->login();
+        $factory->get("user")->login();
         break;
     case "logout":
-        $view = $factory->get("user")->logout();
+        $factory->get("user")->logout();
         break;
     case "createArticle":
         $view = $factory->get("article")->articleForm();
         break;
     case "saveArticle":
-        $view = $factory->get("article")->save();
+        $factory->get("article")->save();
+        break;
+    case "article":
+        list($view, $data) = $factory->get("article")->get();
         break;
 }
 

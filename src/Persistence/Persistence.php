@@ -16,7 +16,7 @@ class Persistence
 
     function insert($statement, $values)
     {
-        $this->adapter->insert($statement, $values);
+        return $this->adapter->insert($statement, $values);
     }
 
     function select($statement, $values = [])

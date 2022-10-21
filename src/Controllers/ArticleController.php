@@ -28,9 +28,33 @@ class ArticleController extends BaseController
         $user = $_SESSION["user"];
 
         $stmnt = "INSERT INTO articles (title, text, image, userId, createdAt) VALUES (?,?,?,?,?)";
-        $data = [
+        $values = [
             $_POST["title"], $_POST["text"], $_POST["image"], $user["id"], date('Y-m-d H:i:s') 
         ];
-        $this->persistence->insert($stmnt, $values);
+        $id = $this->persistence->insert($stmnt, $values);
+
+        header("Location: index.php?page=article&id=".$id);
+        die();
+    }
+
+    public function get()
+    {
+        if (!isset($_GET["id"])) {
+            header("Location: index.php?error=1");
+            die();
+        }
+
+        $id = $_GET["id"];
+        $stmnt = "SELECT * FROM articles WHERE id = ?";
+        $data = [
+            $id
+        ];
+        $items = $this->persistence->select($stmnt, $data);
+        if (count($items) == 0) {
+            header("Location: index.php?error=1");
+            die();
+        }
+
+        return ["article.php", $items[0]];
     }
 }

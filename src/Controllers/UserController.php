@@ -5,13 +5,6 @@ use App\Persistence\Persistence;
 
 class UserController extends BaseController
 {
-    private Persistence $persistence;
-
-    function __construct()
-    {
-        $this->persistence = new Persistence();
-    }
-
     public function loginForm()
     {
         return "login.php";

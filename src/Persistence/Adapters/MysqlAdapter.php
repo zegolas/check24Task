@@ -22,7 +22,9 @@ class MysqlAdapter implements IAdapter
         $stmt = $this->conn->prepare($statement);
         $stmt->bind_param(str_repeat('s', count($values)), ...$values);
         $stmt->execute();
+        $id = $stmt->insert_id;
         $stmt->close();
+        return $id;
     }
 
 
