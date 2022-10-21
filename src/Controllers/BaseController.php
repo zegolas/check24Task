@@ -7,9 +7,9 @@ class BaseController
 {
     protected Persistence $persistence;
 
-    function __construct()
+    function __construct($persistence)
     {
-        $this->persistence = new Persistence();
+        $this->persistence = $persistence;
     }
     
 }

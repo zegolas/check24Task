@@ -3,7 +3,7 @@ namespace App\Persistence\Adapters;
 
 interface IAdapter
 {
-    function connect();
+    function connect($servername, $username, $password, $dbname);
     function insert($statement, $values);
     function select($statement, $values = []);
 }

@@ -2,12 +2,13 @@
 session_start();
 
 require __DIR__ . '../../../vendor/autoload.php';
+require "Config.php";
 
 $page = isset($_GET["page"])?$_GET["page"]:"homepage";
 $view = "homepage.php";
 $data = null;
 
-$factory = new App\Factory\Factory();
+$factory = new App\Factory\Factory($config);
 
 switch ($page) {
     case "login":

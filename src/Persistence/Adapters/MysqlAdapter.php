@@ -3,15 +3,15 @@ namespace App\Persistence\Adapters;
 
 class MysqlAdapter implements IAdapter
 {
-    private string $servername = "localhost";
+    /*private string $servername = "localhost";
     private string $username = "root";
     private string $password = "";
-    private string $dbname = "check24";
+    private string $dbname = "check24";*/
     private $conn;
 
-    function connect()
+    function connect($servername, $username, $password, $dbname)
     {
-        $this->conn = new \mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        $this->conn = new \mysqli($servername, $username, $password, $dbname);
         if ($this->conn->connect_error) {
             throw new Exception("Could not connect to database");
         } 

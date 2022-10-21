@@ -8,10 +8,10 @@ class Persistence
 {
     private IAdapter $adapter;
 
-    function __construct()
+    function __construct($config)
     {
         $this->adapter = new MysqlAdapter();
-        $this->adapter->connect();
+        $this->adapter->connect($config["serverName"], $config["username"], $config["password"], $config["db"]);
     }
 
     function insert($statement, $values)
