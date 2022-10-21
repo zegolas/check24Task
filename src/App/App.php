@@ -7,6 +7,7 @@ require "Config.php";
 $page = isset($_GET["page"])?$_GET["page"]:"homepage";
 $view = "homepage.php";
 $data = null;
+$count = 0;
 
 $factory = new App\Factory\Factory($config);
 
@@ -30,7 +31,7 @@ switch ($page) {
         list($view, $data) = $factory->get("article")->get();
         break;
     case "homepage":
-        list($view, $data) = $factory->get("article")->list();
+        list($view, $data, $count) = $factory->get("article")->list();
         break;
     default:
         $view = "not_found.php";

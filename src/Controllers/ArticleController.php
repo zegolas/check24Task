@@ -65,8 +65,17 @@ class ArticleController extends BaseController
 
     public function list()
     {
-        $stmnt = "SELECT * FROM articles ORDER BY createdAt desc limit 3";
-        $items = $this->persistence->select($stmnt);
-        return ["homepage.php", $items];
+        $page = isset($_GET["pag"]) && is_numeric($_GET["pag"]) && $_GET["pag"] > 0? $_GET["pag"] : 1;
+        $limitStart = ($page - 1) * 3;
+        $stmnt = "SELECT * FROM articles ORDER BY createdAt desc limit ?, 3";
+        $data = [
+            $limitStart
+        ];
+        $items = $this->persistence->select($stmnt, $data);
+
+        $stmntCount = "SELECT count(*) as count FROM articles;";
+        $count = $this->persistence->select($stmntCount);
+        $total = $count[0]["count"];
+        return ["homepage.php", $items, $total];
     }
 }

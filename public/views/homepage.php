@@ -14,4 +14,9 @@
             </div>
         </div>
     <?php endforeach;?>
+    <div>
+    <?php for($i=1; $i<=ceil($count/3); $i++):?>
+        <a style="float:left; margin-left:20px;" href="index.php?pag=<?php echo $i;?>" ><?php echo $i;?></a>
+    <?php endfor;?>
+    </div>
 </div>
