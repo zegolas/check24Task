@@ -7,14 +7,15 @@ class UserController extends BaseController
 {
     public function loginForm()
     {
+        if (isset($_SESSION["user"]))
+            $this->redirect("index.php");
         return "login.php";
     }
 
     public function login()
     {
         if (!isset($_POST["username"]) || !isset($_POST["password"])) {
-            header("Location: index.php?page=login&error=1");
-            die();
+            $this->redirect("index.php?page=login&error=1");
         }
 
         /**
@@ -50,7 +51,6 @@ class UserController extends BaseController
     public function logout()
     {
         unset($_SESSION["user"]);
-        header("Location: index.php");
-        die();
+        $this->redirect("index.php");
     }
 }

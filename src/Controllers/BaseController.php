@@ -11,5 +11,11 @@ class BaseController
     {
         $this->persistence = $persistence;
     }
+
+    protected function redirect(string $url)
+    {
+        header("Location: $url");
+        die();
+    }
     
 }

@@ -7,8 +7,7 @@ class ArticleController extends BaseController
     public function articleForm()
     {
         if (!isset($_SESSION["user"])) {
-            header("Location: index.php");
-            die();
+            $this->redirect("index.php");
         }
         return "article_form.php";
     }
@@ -16,13 +15,11 @@ class ArticleController extends BaseController
     public function save()
     {
         if (!isset($_POST["title"]) || !isset($_POST["image"]) || !isset($_POST["text"])) {
-            header("Location: index.php?page=createArticle&error=1");
-            die();
+            $this->redirect("index.php?page=createArticle&error=1");
         }
 
         if (!isset($_SESSION["user"])) {
-            header("Location: index.php");
-            die();
+            $this->redirect("index.php");
         }
 
         $user = $_SESSION["user"];
@@ -33,15 +30,13 @@ class ArticleController extends BaseController
         ];
         $id = $this->persistence->insert($stmnt, $values);
 
-        header("Location: index.php?page=article&id=".$id);
-        die();
+        $this->redirect("index.php?page=article&id=".$id);
     }
 
     public function get()
     {
         if (!isset($_GET["id"])) {
-            header("Location: index.php?error=1");
-            die();
+            $this->redirect("index.php?error=1");
         }
 
         $id = $_GET["id"];
@@ -51,8 +46,7 @@ class ArticleController extends BaseController
         ];
         $items = $this->persistence->select($stmnt, $data);
         if (count($items) == 0) {
-            header("Location: index.php?error=1");
-            die();
+            $this->redirect("index.php?error=1");
         }
 
         return ["article.php", $items[0]];
