@@ -34,5 +34,6 @@ switch ($page) {
         break;
 }
 
+$messages = App\Message\Message::getInstance()->pull();
 
 require(__DIR__."/../../public/layout.php");

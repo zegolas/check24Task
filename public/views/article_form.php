@@ -1,17 +1,17 @@
 <form action="index.php?page=saveArticle" method="POST" class="needs-validation" novalidate="">
     <div class="row g-3">
         <div class="col-12">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label">Title*</label>
             <div class="input-group has-validation">
             <input name="title" type="text" class="form-control" id="title" placeholder="Title" required="">
         </div>
         <div class="col-12">
-            <label for="image" class="form-label">Image</label>
+            <label for="image" class="form-label">Image*</label>
             <div class="input-group has-validation">
             <input name="image" type="text" class="form-control" id="image" placeholder="Image" required="">
         </div>
         <div class="col-12">
-            <label for="text" class="form-label">Text</label>
+            <label for="text" class="form-label">Text*</label>
             <div class="input-group has-validation">
             <textArea name="text" type="text" class="form-control" id="text" placeholder="Text" required=""></textArea>
         </div>

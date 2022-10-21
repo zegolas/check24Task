@@ -5,6 +5,16 @@ use App\Persistence\Persistence;
 
 class UserController extends BaseController
 {
+    function __construct($persistence)
+    {
+        parent::__construct($persistence);
+        $this->errorList = [
+            1 => "Please fill the username and password",
+            2 => "Invalid username or password",
+        ];
+        $this->validateErrors();
+    }
+
     public function loginForm()
     {
         if (isset($_SESSION["user"]))
@@ -14,7 +24,7 @@ class UserController extends BaseController
 
     public function login()
     {
-        if (!isset($_POST["username"]) || !isset($_POST["password"])) {
+        if (!isset($_POST["username"]) || !isset($_POST["password"]) || $_POST["username"] == "" || $_POST["password"] == "") {
             $this->redirect("index.php?page=login&error=1");
         }
 
@@ -38,7 +48,7 @@ class UserController extends BaseController
         echo md5($password);
         $items = $this->persistence->select($stmnt, $data);
         if (count($items) == 0){
-            header("Location: index.php?page=login&error=1");
+            header("Location: index.php?page=login&error=2");
             die();
         }
             

@@ -34,6 +34,13 @@
 </div>
 
 <main class="container">
+    <?php if(count($messages) > 0): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php foreach($messages as $message): ?>
+                <?php echo $message;?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     <?php include("views/".$view);?>  
 </main>
 

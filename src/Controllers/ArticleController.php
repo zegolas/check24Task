@@ -4,6 +4,16 @@ namespace App\Controllers;
 
 class ArticleController extends BaseController
 {
+    function __construct($persistence)
+    {
+        parent::__construct($persistence);
+        $this->errorList = [
+            1 => "Please fill all the fields",
+            2 => "Post not found",
+        ];
+        $this->validateErrors();
+    }
+
     public function articleForm()
     {
         if (!isset($_SESSION["user"])) {
@@ -14,7 +24,8 @@ class ArticleController extends BaseController
 
     public function save()
     {
-        if (!isset($_POST["title"]) || !isset($_POST["image"]) || !isset($_POST["text"])) {
+        if (!isset($_POST["title"]) || !isset($_POST["image"]) || !isset($_POST["text"]) || 
+            $_POST["title"] == "" || $_POST["image"] == "" || $_POST["text"] == "") {
             $this->redirect("index.php?page=createArticle&error=1");
         }
 
@@ -36,7 +47,7 @@ class ArticleController extends BaseController
     public function get()
     {
         if (!isset($_GET["id"])) {
-            $this->redirect("index.php?error=1");
+            $this->redirect("index.php?error=2");
         }
 
         $id = $_GET["id"];
@@ -46,7 +57,7 @@ class ArticleController extends BaseController
         ];
         $items = $this->persistence->select($stmnt, $data);
         if (count($items) == 0) {
-            $this->redirect("index.php?error=1");
+            $this->redirect("index.php?error=2");
         }
 
         return ["article.php", $items[0]];
