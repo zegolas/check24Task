@@ -48,14 +48,12 @@ class UserController extends BaseController
         echo md5($password);
         $items = $this->persistence->select($stmnt, $data);
         if (count($items) == 0){
-            header("Location: index.php?page=login&error=2");
-            die();
+            $this->redirect("index.php?page=login&error=2");
         }
             
         
         $_SESSION["user"] = $items[0];
-        header("Location: index.php");
-        die();
+        $this->redirect("index.php");
     }
 
     public function logout()
