@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2022 a las 15:12:32
+-- Tiempo de generación: 21-10-2022 a las 15:34:21
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -61,12 +61,21 @@ INSERT INTO `articles` (`id`, `createdAt`, `title`, `text`, `author`, `image`, `
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
-  `Name` varchar(100) NOT NULL,
-  `Mail` varchar(100) NOT NULL,
-  `user` varchar(200) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `mail` varchar(100) NOT NULL,
   `comment` text NOT NULL,
-  `userId` int(11) NOT NULL
+  `userId` int(11) NOT NULL,
+  `articleId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comments`
+--
+
+INSERT INTO `comments` (`id`, `createdAt`, `name`, `mail`, `comment`, `userId`, `articleId`) VALUES
+(1, '2022-10-21 15:28:26', 'wdqwdq', '', 'dqedewew', 2, 10),
+(2, '2022-10-21 15:33:50', 'fewfew', 'fwefew', 'fewfwefwe', 2, 9);
 
 -- --------------------------------------------------------
 
@@ -125,7 +134,7 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT de la tabla `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

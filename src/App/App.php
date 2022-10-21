@@ -27,6 +27,9 @@ switch ($page) {
     case "saveArticle":
         $factory->get("article")->save();
         break;
+    case "saveComment":
+        $factory->get("article")->saveComment();
+        break;
     case "article":
         list($view, $data) = $factory->get("article")->get();
         break;

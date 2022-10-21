@@ -56,10 +56,17 @@ class ArticleController extends BaseController
             $id
         ];
         $items = $this->persistence->select($stmnt, $data);
+        
         if (count($items) == 0) {
             $this->redirect("index.php?error=2");
         }
 
+        $stmntComment = "SELECT * FROM comments WHERE articleId = ?";
+        $dataComment = [
+            $id
+        ];
+        $itemsComment = $this->persistence->select($stmntComment, $dataComment);
+        $items[0]["comments"] = $itemsComment;
         return ["article.php", $items[0]];
     }
 
@@ -78,4 +85,30 @@ class ArticleController extends BaseController
         $total = $count[0]["count"];
         return ["homepage.php", $items, $total];
     }
+
+    public function saveComment()
+    {
+        if (!isset($_GET["id"])) {
+            $this->redirect("index.php?error=2");
+        }
+        if (!isset($_POST["name"]) || !isset($_POST["text"]) || 
+            $_POST["name"] == "" || $_POST["text"] == "" ) {
+            $this->redirect("index.php?page=article&error=1&id=".$_GET["id"]);
+        }
+
+        if (!isset($_SESSION["user"])) {
+            $this->redirect("index.php");
+        }
+
+        $user = $_SESSION["user"];
+
+        $stmnt = "INSERT INTO comments (name, comment, mail, userId, createdAt, articleId) VALUES (?,?,?,?,?,?)";
+        $values = [
+            $_POST["name"], $_POST["text"], $_POST["mail"], $user["id"], date('Y-m-d H:i:s'), $_GET["id"]
+        ];
+        $id = $this->persistence->insert($stmnt, $values);
+
+        $this->redirect("index.php?page=article&id=".$_GET["id"]);
+    }
+
 }
