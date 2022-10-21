@@ -16,6 +16,18 @@ class UserController extends BaseController
             header("Location: index.php?page=login&error=1");
             die();
         }
+
+        /**
+         * Validate recaptcha for login form 
+         * 
+        $recaptcha = new \ReCaptcha\ReCaptcha("6LfuRpwiAAAAAP4Jf40ej5wztnoV2W77fWvBtD7q");
+        $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')
+                        ->verify($_POST["token"], $_SERVER['REMOTE_ADDR']);
+
+        if(!$resp->isSuccess()) {
+            die(print_r($resp->getErrorCodes()));
+        }*/
+        
         $username = $_POST["username"];
         $password = $_POST["password"];
         $stmnt = "SELECT * FROM users WHERE username = ? && password = ?";

@@ -19,3 +19,6 @@
     <hr class="my-4">
     <button class="w-100 btn btn-primary btn-lg" type="submit">Save</button>
 </form>
+
+<script type="text/javascript" src="public/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="public/js/scripts.js"></script>
